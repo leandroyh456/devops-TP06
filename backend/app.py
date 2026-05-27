@@ -36,8 +36,6 @@ def init_db():
     
 
 @app.route("/health")
-
-
 def health():
     try:
         conn = get_conn()
@@ -53,8 +51,6 @@ def health():
     
 
 @app.route("/api/notes", methods=["GET"])
-
-
 def get_notes():
     conn = get_conn()
     cur = conn.cursor()
@@ -69,8 +65,6 @@ def get_notes():
     
 
 @app.route("/api/notes", methods=["POST"])
-
-
 def create_note():
     data = request.get_json()
     conn = get_conn()
@@ -87,8 +81,6 @@ def create_note():
 
 
 @app.route("/api/notes/<int:note_id>", methods=["DELETE"])
-
-
 def delete_note(note_id):
     conn = get_conn()
     cur = conn.cursor()
@@ -97,6 +89,7 @@ def delete_note(note_id):
     cur.close()
     conn.close()
     return jsonify({"message": "nota eliminada"})
+
 
 if __name__ == "__main__":
     init_db()
