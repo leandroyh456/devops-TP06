@@ -3,7 +3,6 @@ from flask_cors import CORS
 import psycopg2
 import os
 import datetime
-import time
 
 app = Flask(__name__)
 CORS(app)
@@ -17,7 +16,7 @@ def get_conn():
         user=os.getenv("DB_USER", "postgres"),
         password=os.getenv("DB_PASSWORD", "postgres")
     )
-    
+
 
 def init_db():
     conn = get_conn()
@@ -33,7 +32,7 @@ def init_db():
     conn.commit()
     cur.close()
     conn.close()
-    
+
 
 @app.route("/health")
 def health():
@@ -48,7 +47,7 @@ def health():
         "db": db_status,
         "time": datetime.datetime.utcnow().isoformat()
     })
-    
+
 
 @app.route("/api/notes", methods=["GET"])
 def get_notes():
@@ -62,7 +61,7 @@ def get_notes():
         {"id": r[0], "title": r[1], "content": r[2], "created_at": str(r[3])}
         for r in rows
     ])
-    
+
 
 @app.route("/api/notes", methods=["POST"])
 def create_note():
