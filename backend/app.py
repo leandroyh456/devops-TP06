@@ -69,7 +69,7 @@ def create_note():
 
     if not data or "title" not in data:
         return jsonify({"error": "title es requerido"}), 400
-    
+
     conn = get_conn()
     cur = conn.cursor()
     cur.execute(
